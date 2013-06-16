@@ -1,0 +1,124 @@
+doctype 5
+html
+  head
+    title= "CollabCode"
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/socket.js")
+    script(src="/javascripts/jquery.min.js")
+    link(rel="stylesheet", href="/stylesheets/bootstrap.css")
+    script(src="/javascripts/bootstrap.js")
+  body
+    div.navbar.navbar-inverse.navbar-fixed-top
+      div.navbar-inner
+        div.container
+          a(data-toggle="collapse", data-target=".nav-collapse").btn.btn-navbar
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href="#").brand
+           |CollabCode
+          div.nav-collapse.collapse
+            ul.nav
+              li.dropdown
+                a(href="#", data-toggle="dropdown").dropdown-toggle
+                  |Languages
+                  b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href="#")#cpp_c
+                        |C++
+                    li
+                      a(href="#")#javascript
+                        |Javascript
+                    li
+                      a(href="#")#java
+                        |Java
+                    li
+                      a(href="#")#python
+                        |Python
+                    li
+                      a(href="#")#haskell
+                        |Haskell
+                    li
+                      a(href="#")#css
+                        |css
+                    li
+                      a(href="#")#html
+                        |html
+                    li
+                      a(href="#")#csharp
+                        |C#
+                    li
+                      a(href="#")#perl
+                        |Perl
+                    li
+                      a(href="#")#ruby
+                        |Ruby
+              li.dropdown
+                a(href="#", data-toggle="dropdown").dropdown-toggle
+                  |Themes
+                  b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href="#")#ambiance
+                        |Ambiance
+                    li
+                      a(href="#")#chaos
+                        |Chaos
+                    li
+                      a(href="#")#chrome
+                        |Chrome
+                    li
+                      a(href="#")#clouds
+                        |Clouds
+                    li
+                      a(href="#")#cobalt
+                        |Cobalt
+                    li
+                      a(href="#")#crimson_editor
+                        |Crimson Editor
+                    li
+                      a(href="#")#dawn
+                        |Dawn
+                    li
+                      a(href="#")#dreamweaver
+                        |Dreamweaver
+                    li
+                      a(href="#")#eclipse
+                        |eclipse
+                    li
+                      a(href="#")#github
+                        |Github
+                    li
+                      a(href="#")#kr
+                        |kr
+                    li
+                      a(href="#")#merbivore
+                        |merbivore
+                    li
+                      a(href="#")#mono_industrial
+                        |Mono Industrial
+                    li
+                      a(href="#")#monokai
+                        |Monokai
+                    li
+                      a(href="#")#twilight
+                        |Twilight
+                    li
+                      a(href="#")#terminal
+                        |Terminal
+              li
+                input(type="text", placeholder="Enter handle").input-large#handle
+              li
+                button(type="submit").btn-custom#add
+                  |Add me
+              li
+                input(type="text", placeholder="Enter collaborator's handle").input-large#othershandle
+              li
+                button(type="submit").btn-custom#connect
+                  |Connect
+
+      div#editor
+    script(src="/javascripts/ace-builds/src-noconflict/ace.js")
+    script(src="/javascripts/aceAux.js")
