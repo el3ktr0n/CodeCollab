@@ -8,7 +8,7 @@ html
     script(src="/javascripts/jquery.min.js")
     link(rel="stylesheet", href="/stylesheets/bootstrap.css")
     script(src="/javascripts/bootstrap.js")
-  body
+  body(style="background-color:black")
     div.navbar.navbar-inverse.navbar-fixed-top
       div.navbar-inner
         div.container
@@ -111,14 +111,36 @@ html
               li
                 input(type="text", placeholder="Enter handle").input-large#handle
               li
+                |&nbsp;
+              li
                 button(type="submit").btn-custom#add
                   |Add me
               li
+                |&nbsp;
+              li
                 input(type="text", placeholder="Enter collaborator's handle").input-large#othershandle
+              li
+                |&nbsp;
               li
                 button(type="submit").btn-custom#connect
                   |Connect
+              li
+                |&nbsp;
 
       div#editor
+      div
+        textarea#console
+      div
+        input(type="text")#input
+      footer(style="background-color:#000").footer
+        p(align="center")
+          |Coded by 
+          b#myname
+            |&nbsp;
+            a(href="http://facebook.com/dhruva.bhaswar")
+              |Dhruva Bhaswar
+          |&nbsp;aka
+          b#myhandle
+            |&nbsp;el3ktr0n
     script(src="/javascripts/ace-builds/src-noconflict/ace.js")
     script(src="/javascripts/aceAux.js")

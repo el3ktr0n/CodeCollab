@@ -1,5 +1,6 @@
 var editor = ace.edit("editor");
 var otherPerson;
+
 editor.setTheme("ace/theme/twilight");
 editor.getSession().setMode("ace/mode/c_cpp");
 $("#editor").keyup(function(){
@@ -129,17 +130,56 @@ io.on('changeTheme', function(data){
 $("#add").click(function(){
 	emitUserInfo($("#handle").val());
 	var temp=$("#handle").val();
-	$("#handle").val("Welcome "+temp);
-});
-$("#connect").click(function(){
-	connectToUser($("#othershandle").val());
-	var temp=$("#othershandle").val();
-	$("#othershandle").val("Connected to "+temp);
+	//$("#handle").val("Welcome "+temp);
+	$("#handle").val("");
+	$("#console").append("Welcome "+temp+"\n");
+	//scroll to bottom
+	var textarea = document.getElementById("console");
+    textarea.scrollTop = textarea.scrollHeight;
 });
 
 io.on('usernameAlreadyRegistered', function(msg){
 	console.log(msg);
-	alert(msg);
+	//alert(msg);
+	$("#console").append("Sorry!! System has detected handle conflict. Please choose different username.\n")
+	var textarea = document.getElementById("console");
+    textarea.scrollTop = textarea.scrollHeight;
+});
+
+$("#connect").click(function(){
+	connectToUser($("#othershandle").val());
+	var temp=$("#othershandle").val();
+	//$("#othershandle").val("Connected to "+temp);
+	$("#othershandle").val("");
+	$("#console").append("Connected to "+temp+"\n");
+	//scroll to bottom
+	var textarea = document.getElementById("console");
+    textarea.scrollTop = textarea.scrollHeight;
+});
+
+//deactivate the console on mouse click
+$("#console").mousedown(function(){
+	document.getElementById("console").disabled=true;
+});
+
+//clear the text box on pressing enter and append to the console meanwhile send it to others to have chat
+$("input").keyup(function(e){
+	if(e.keyCode == 13 && e.target.nodeName=="INPUT"){
+  		var msg=this.value;
+  		//console.log("msg="+msg);
+  		$("#console").append("Me: "+msg+"\n");
+  		emitMessage(msg);
+  		this.value="";
+  		var textarea = document.getElementById("console");
+    	textarea.scrollTop = textarea.scrollHeight;
+	}
+});
+
+io.on('receiveMessage', function(msg){
+	console.log(msg);
+	$("#console").append(otherPerson+": "+msg+"\n");
+	var textarea = document.getElementById("console");
+    textarea.scrollTop = textarea.scrollHeight;
 });
 
 function emitCode(code){
@@ -182,4 +222,13 @@ function emitUserInfo(handle){
 function connectToUser(othershandle){
 	otherPerson=othershandle;
 	console.log(otherPerson);
+}
+
+function emitMessage(msg){
+	var sessionId = io.socket.sessionid;
+	var data = {
+		msg: msg
+	};
+	console.log(msg);
+	io.emit('sendMessage', data, sessionId, otherPerson);
 }

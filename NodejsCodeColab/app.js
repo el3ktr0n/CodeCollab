@@ -71,5 +71,11 @@ io.sockets.on('connection', function(socket){
 			clients[data.handle]=session;
 		}
 	});
+	//server on receiving message from the sender
+	socket.on('sendMessage', function(data, session, handle){
+		console.log("session "+ session + "sent the message: ");
+		console.log(data+" for "+handle);
+		io.sockets.socket(clients[handle]).emit("receiveMessage", data.msg);//server sending the message to the client otherperson by generating the event receive Message
+	});
 	
 });
